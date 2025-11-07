@@ -1,0 +1,65 @@
+/* styles.no-fx.css — override to disable background particles & moving stripe, keep layout intact */
+
+/* 0) Safety: if somewhere html/body were left invisible */
+html, body { opacity: 1 !important; }
+
+/* 1) Kill any full-screen background pseudo-elements / "flying particles" */
+html::before, html::after,
+body::before, body::after,
+.stars, .starfield, .dust, .sparkle, .glow {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+}
+
+/* 2) Disable moving separators/stripes */
+.section + .section::before,
+.header::after {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+}
+
+/* 3) Remove glossy sweep/shimmer overlays */
+.nav a::before,
+.gallery-grid a::after,
+.tile::before,
+.swatch::before,
+.swatch .chip::after {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+  opacity: 0 !important;
+  transition: none !important;
+}
+
+/* 4) Make lazy-reveal elements visible even without JS */
+.reveal { opacity: 1 !important; transform: none !important; }
+
+/* 5) Tone down heavy 3D hovers */
+.tile:hover,
+.card:hover,
+.gallery-grid a:hover,
+.swatch:hover,
+.btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,.2) !important;
+}
+
+/* 6) Keep primary button look; ensure non-primary stays simple */
+.btn:not(.primary) {
+  background: rgba(16, 16, 32, 0.8) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--card-border) !important;
+}
+.btn.primary {
+  /* keep gradient if defined in base; no extra changes here */
+}
+
+/* 7) Cut long transitions globally (snappier & cheaper) */
+* { transition: all .15s ease !important; }
+
+/* Optional: if your theme uses light text, ensure dark background is present
+:root { --bg: #0a0a14; --text: #e2e8f0; }
+html, body { background: var(--bg); color: var(--text); }
+*/
