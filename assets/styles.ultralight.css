@@ -407,13 +407,8 @@ html, body {
   margin: 40px 0;
 }
 
-.section:first-child {
-  margin-top: 0;
-}
-
-.section:last-child {
-  margin-bottom: 0;
-}
+.section:first-child { margin-top: 0; }
+.section:last-child { margin-bottom: 0; }
 
 .section + .section {
   margin-top: 50px;
@@ -421,18 +416,18 @@ html, body {
 }
 
 .section + .section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -25px;
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    var(--card-border) 20%, 
-    var(--card-border) 80%, 
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--card-border) 20%,
+    var(--card-border) 80%,
     transparent 100%);
-}
+
 
 .gallery .pad {
   padding: 30px;
@@ -685,117 +680,4 @@ footer::before {
 .page-title {
 
   will-change: filter, text-shadow;
-}
-
-/* Адаптивність */
-@media (max-width: 1024px) {
-  .hero {
-    grid-template-columns: 1fr;
-  }
-  
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .nav {
-    justify-content: center;
-  }
-  
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  
-  .gallery, .side {
-    grid-column: auto;
-  }
-  
-  .side {
-    gap: 20px;
-  }
-  
-  .swatch .label {
-    padding: 12px;
-    gap: 12px;
-  }
-  
-  .palette {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 15px;
-  }
-  
-  .header {
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
-  }
-  
-  .brand h1 {
-    font-size: 24px;
-  }
-  
-  .hero h2 {
-    font-size: 32px;
-  }
-  
-  .gallery-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .tiles {
-    grid-template-columns: 1fr;
-  }
-  
-  .palette {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  }
-  
-  .cta {
-    flex-direction: column;
-  }
-  
-  .card .pad {
-    padding: 20px;
-  }
-  
-  .palette-section .pad {
-    padding: 20px 20px 15px 20px;
-  }
-  
-  .swatch .label {
-    padding: 10px;
-    gap: 10px;
-    flex-direction: column;
-    align-items: stretch;
-    text-align: center;
-  }
-  
-  .swatch .label span {
-    margin-bottom: 5px;
-  }
-  
-  .copy {
-    padding: 8px 12px;
-    font-size: 11px;
-  }
-}
-
-/* Великі екрани */
-@media (min-width: 1400px) {
-  .palette {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  }
-}
-
-/* Вимкнення анімацій для користувачів, які віддають перевагу зменшеному руху */
-@media (prefers-reduced-motion: reduce) {
-  * {
-
-    transition-duration: 0.01ms !important;
-  }
 }
