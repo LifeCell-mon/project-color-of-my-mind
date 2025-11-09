@@ -177,49 +177,130 @@ body {
   border-radius: 0 var(--radius) var(--radius) 0;
 }
 
-/* Palette styles */
+/* ОНОВЛЕНІ СТИЛІ ДЛЯ ПАЛІТРИ КОЛЬОРІВ */
 .palette {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
 }
 
 .swatch {
   display: flex;
   flex-direction: column;
-  border-radius: var(--radius);
+  border-radius: 12px;
   overflow: hidden;
-  border: 1px solid var(--border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  background: white;
+  border: 1px solid #e5e7eb;
 }
 
-.chip {
-  height: 80px;
+.swatch:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.color-preview {
+  height: 100px;
   width: 100%;
-}
-
-.label {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 12px;
-  background-color: var(--bg-primary);
-  font-family: monospace;
-  font-size: 0.875rem;
+  justify-content: center;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
-.copy {
+.color-preview::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.swatch:hover .color-preview::after {
+  opacity: 1;
+}
+
+.color-info {
+  padding: 16px;
+  background: white;
+  text-align: center;
+  border-top: 1px solid #f3f4f6;
+}
+
+.color-name {
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+.hex-code {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.copy-btn {
   background: none;
   border: none;
-  color: var(--accent);
+  color: #3b82f6;
   cursor: pointer;
-  font-size: 0.75rem;
   padding: 4px 8px;
   border-radius: 4px;
-  transition: background-color 0.2s ease;
+  font-size: 0.75rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
-.copy:hover {
+.copy-btn:hover {
   background-color: rgba(59, 130, 246, 0.1);
+  color: #2563eb;
+}
+
+.copy-btn:active {
+  transform: scale(0.95);
+}
+
+.copy-btn::before {
+  content: "📋";
+  font-size: 0.7rem;
+}
+
+.copy-btn.copied::before {
+  content: "✅";
+}
+
+/* Специфічні стилі для темних відтінків - білий текст для кращого контрасту */
+.swatch .color-preview[style*="background:#172554"],
+.swatch .color-preview[style*="background:#1e40af"],
+.swatch .color-preview[style*="background:#1d4ed8"] {
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Анімація при копіюванні */
+@keyframes copyFlash {
+  0% { background-color: transparent; }
+  50% { background-color: rgba(34, 197, 94, 0.2); }
+  100% { background-color: transparent; }
+}
+
+.copy-flash {
+  animation: copyFlash 0.6s ease;
 }
 
 /* Page navigation */
@@ -266,7 +347,7 @@ footer {
 }
 
 /* Responsive adjustments */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .header {
     flex-direction: column;
     gap: 16px;
@@ -282,11 +363,43 @@ footer {
   }
   
   .palette {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+  }
+  
+  .color-preview {
+    height: 80px;
+  }
+  
+  .color-info {
+    padding: 12px;
   }
   
   .page-navigation {
     flex-direction: column;
     gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .palette {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .swatch {
+    border-radius: 8px;
+  }
+  
+  .color-preview {
+    height: 70px;
+  }
+  
+  .color-name {
+    font-size: 0.9rem;
+  }
+  
+  .hex-code {
+    font-size: 0.8rem;
   }
 }
